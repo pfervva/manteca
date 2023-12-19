@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla de Multiplicar</title>
+  <style>
+  
+  </style>
+</head>
+<body>
+
+<label for="numero">Seleccione un número:</label>
+<select id="numero" onchange="generarTabla()">
+  <!-- Opciones del 1 al 10 -->
+  <option value=""></option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+  <option value="6">6</option>
+  <option value="7">7</option>
+  <option value="8">8</option>
+  <option value="9">9</option>
+  <option value="10">10</option>
+</select>
+
+<div id="tablaMultiplicar"></div>
+
+<script>
+  function generarTabla() {
+    const numero = document.getElementById('numero').value;
+    const tablaMultiplicar = document.getElementById('tablaMultiplicar');
+
+    if (numero) {
+      let tablaHTML = `<h2>Tabla de Multiplicar del ${numero}</h2><table border="1"><tr><th>Multiplicador</th><th>Resultado</th></tr>`;
+
+      for (let i = 1; i <= 10; i++) {
+        const resultado = numero * i;
+        tablaHTML += `<tr><td>${numero} x ${i}</td><td>${resultado}</td></tr>`;
+      }
+
+      tablaHTML += '</table>';
+      tablaMultiplicar.innerHTML = tablaHTML;
+    } else {
+      tablaMultiplicar.innerHTML = '';
+    }
+  }
+</script>
+
+</body>
+</html>

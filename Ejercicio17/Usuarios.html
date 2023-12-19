@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listado de Usuarios</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+
+<h1>Listado de Usuarios</h1>
+
+<div id="users"></div>
+
+<script>
+  fetch('https://randomuser.me/api/?results=10')
+    .then(response => response.json())
+    .then(data => {
+      const usersContainer = document.getElementById('users');
+      data.results.forEach(user => {
+        usersContainer.innerHTML += `
+          <div class="user">
+            <img src="${user.picture.large}" alt="Usuario">
+            <p>${user.name.title} ${user.name.first} ${user.name.last}</p>
+            <p>Email: ${user.email}</p>
+            <p>Teléfono: ${user.phone}</p>
+          </div>
+        `;
+      });
+    })
+    .catch(error => console.error('Error al obtener usuarios:', error));
+</script>
+
+</body>
+</html>

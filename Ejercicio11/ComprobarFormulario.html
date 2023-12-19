@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Datos Personales</title>
+  <style>
+
+  </style>
+</head>
+<body>
+
+<h1>Formulario de Información Personal</h1>
+<form id="personalForm" onsubmit="validarFormulario(event)">
+  <label for="inputNombre">Nombre:</label>
+  <input type="text" id="inputNombre" name="nombre" required>
+  
+  <label for="inputEmail">Correo Electrónico:</label>
+  <input type="email" id="inputEmail" name="email" required>
+  
+  <label for="inputEdad">Edad:</label>
+  <input type="number" id="inputEdad" name="edad" required>
+  
+  <button type="submit">Enviar</button>
+</form>
+
+<script>
+  function validarFormulario(event) {
+    const nombre = document.getElementById('inputNombre').value;
+    const email = document.getElementById('inputEmail').value;
+    const edad = document.getElementById('inputEdad').value;
+
+    if (nombre.length <= 3) {
+      alert('El nombre debe tener más de 3 caracteres.');
+      event.preventDefault();
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Ingresa un correo electrónico válido.');
+      event.preventDefault(); 
+      return;
+    }
+
+    if (isNaN(edad) || edad < 0 || edad > 120) {
+      alert('La edad debe ser un número entre 0 y 120.');
+      event.preventDefault();
+      return;
+    }
+  }
+</script>
+
+</body>
+</html>

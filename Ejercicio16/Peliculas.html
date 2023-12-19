@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta de Películas</title>
+</head>
+<body>
+
+<h1>Consulta de Películas</h1>
+
+<input type="text" id="movieInput" placeholder="Ingrese el título de la película">
+<button onclick="searchMovies()">Buscar</button>
+
+<div id="movieDetails"></div>
+
+<script>
+  const API_KEY = 'TU_API_KEY'; // Reemplaza 'TU_API_KEY' con tu propia clave de API de TMDb
+
+  // Función para buscar películas
+  function searchMovies(movieTitle) {
+    const movieInput = document.getElementById('movieInput');
+    const movieTitleToSearch = movieTitle || movieInput.value;
+
+    if (!movieTitleToSearch) {
+      console.error('Ingrese el título de la película');
+      return;
+    }
+
+    const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=es-ES&query=${encodeURIComponent(movieTitleToSearch)}&page=1&include_adult=false`;
+
+    fetch(searchUrl)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+
+        // Tomar la primera película de los resultados para obtener detalles
+        if (data.results && data.results.length > 0) {
+          const firstMovieId = data.results[0].id;
+          return getMovieDetails(firstMovieId);
+        }
+      })
+      .catch(error => console.error('Error al buscar películas:', error));
+  }
+
+  // Función para obtener detalles de una película
+  function getMovieDetails(movieId) {
+    const detailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
+
+    fetch(detailsUrl)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+
+        // Mostrar detalles en el DOM
+        const movieDetailsElement = document.getElementById('movieDetails');
+        movieDetailsElement.innerHTML = `
+          <h2>${data.original_title}</h2>
+          <p>Popularidad: ${data.popularity}</p>
+          <p><a href="${data.homepage}" target="_blank">Página de inicio</a></p>
+        `;
+      })
+      .catch(error => console.error('Error al obtener detalles de la película:', error));
+  }
+
+  // Llamada de ejemplo
+  searchMovies('Inception');
+</script>
+
+</body>
+</html>

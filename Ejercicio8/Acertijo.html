@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acertijo</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin: 100px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Resuelve el acertijo</h1>
+
+  <script>
+    let acertijoActual = generarAcertijo();
+
+    function generarAcertijo() {
+      let n1 = Math.floor(Math.random() * 10) + 1; 
+      let n2 = Math.floor(Math.random() * 10) + 1; 
+      let calc = Math.random() < 0.5 ? '+' : '-'; 
+      return {
+        pregunta: `${n1} ${calc} ${n2}`,
+        respuesta: calc === '+' ? n1 + n2 : n1 - n2
+      };
+    }
+
+    function comprobarRespuesta(respueta, correcto) {
+      if (respueta === correcto) {
+        alert('¡De lujo has acertado!');
+      } else {
+        alert(`Error... la respuesta correcta es ${correcto}.`);
+      }
+      reiniciarJuego();
+    }
+
+    function reiniciarJuego() {
+      acertijoActual = generarAcertijo();
+      alert(`Contesta esta pregunta:\n\n${acertijoActual.pregunta}`);
+    }
+
+    alert(`Contesta esta pregunta:\n\n${acertijoActual.pregunta}`);
+
+    let respueta = parseInt(prompt('Contesta esta pregunta:'));
+    comprobarRespuesta(respueta, acertijoActual.respuesta);
+  </script>
+
+</body>
+</html>

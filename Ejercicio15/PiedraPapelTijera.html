@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piedra, Papel, Tijera</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+
+<h1>Piedra, Papel, Tijera</h1>
+
+<button onclick="jugar('piedra')">Piedra</button>
+<button onclick="jugar('papel')">Papel</button>
+<button onclick="jugar('tijera')">Tijera</button>
+
+<div id="resultado"></div>
+
+<script>
+  function jugar(eleccionUsuario) {
+    const opciones = ['piedra', 'papel', 'tijera'];
+    const eleccionMaquina = opciones[Math.floor(Math.random() * opciones.length)];
+
+    mostrarResultado(eleccionUsuario, eleccionMaquina);
+  }
+
+  function mostrarResultado(usuario, maquina) {
+    const resultadoElemento = document.getElementById('resultado');
+
+    if (usuario === maquina) {
+      resultadoElemento.textContent = '¡Empate!';
+    } else if (
+      (usuario === 'piedra' && maquina === 'tijera') ||
+      (usuario === 'papel' && maquina === 'piedra') ||
+      (usuario === 'tijera' && maquina === 'papel')
+    ) {
+      resultadoElemento.textContent = `¡Ganaste! ${usuario} vence a ${maquina}.`;
+    } else {
+      resultadoElemento.textContent = `¡Perdiste! ${maquina} vence a ${usuario}.`;
+    }
+  }
+</script>
+
+</body>
+</html>

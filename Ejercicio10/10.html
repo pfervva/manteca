@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contador de Vocales y Consonantes</title>
+  <style>
+    
+  </style>
+</head>
+<body>
+
+<h1>Contador de vocales y consonantes</h1>
+<label>Ingresa una cadena de texto:</label>
+<input type="text" id="inputCadena">
+<button onclick="contarVocalesConsonantes()">Contar</button>
+
+<p id="outputResultado"></p>
+
+<script>
+  function contarVocalesConsonantes() {
+    const cadena = document.getElementById('inputCadena').value.toLowerCase();
+    let contadorVocales = 0;
+    let contadorConsonantes = 0;
+
+    for (let i = 0; i < cadena.length; i++) {
+      const caracter = cadena.charAt(i);
+      if (/[aeiou]/.test(caracter)) {
+          contadorVocales++;
+        } else {
+          contadorConsonantes++;
+        }
+      }
+    
+    document.getElementById('outputResultado').textContent = `Vocales: ${contadorVocales}, Consonantes: ${contadorConsonantes}`;
+  }
+</script>
+
+</body>
+</html>

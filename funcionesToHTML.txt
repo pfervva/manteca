@@ -1,0 +1,31 @@
+Para recoger datos de html y ponerle id 
+<input type="text" id="inputCadena">
+
+En la funcion lo recoger asi: 
+const cadena = document.getElementById('inputCadena').value.toLowerCase();
+
+Para devolver de la funcion al HTML
+document.getElementById('password').textContent = `Contraseña: ${contrasena}`;
+
+Los muestras asi: 
+<p id="outputResultado"></p>
+
+
+
+
+function contarVocalesConsonantes() {
+    const cadena = document.getElementById('inputCadena').value.toLowerCase();
+    let contadorVocales = 0;
+    let contadorConsonantes = 0;
+
+    for (let i = 0; i < cadena.length; i++) {
+      const caracter = cadena.charAt(i);
+      if (/[aeiou]/.test(caracter)) {
+          contadorVocales++;
+        } else {
+          contadorConsonantes++;
+        }
+      }
+    
+    document.getElementById('outputResultado').textContent = `Vocales: ${contadorVocales}, Consonantes: ${contadorConsonantes}`;
+  }
